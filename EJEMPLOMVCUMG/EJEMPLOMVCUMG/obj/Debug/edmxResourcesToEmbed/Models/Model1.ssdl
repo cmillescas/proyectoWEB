@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="miPrimeraBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Personas">
+    <Key>
+      <PropertyRef Name="idPersona" />
+    </Key>
+    <Property Name="idPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="primerNombre" Type="nvarchar" MaxLength="25" />
+    <Property Name="segundoNombre" Type="nvarchar" MaxLength="25" />
+    <Property Name="apellidos" Type="nvarchar" MaxLength="50" />
+    <Property Name="direccion" Type="nvarchar" MaxLength="50" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="50" />
+    <Property Name="idProfesion" Type="int" />
+  </EntityType>
+  <EntityType Name="Profesion">
+    <Key>
+      <PropertyRef Name="idProfesion" />
+    </Key>
+    <Property Name="idProfesion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombreProfesion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Personas_Profesion">
+    <End Role="Profesion" Type="Self.Profesion" Multiplicity="0..1" />
+    <End Role="Personas" Type="Self.Personas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesion">
+        <PropertyRef Name="idProfesion" />
+      </Principal>
+      <Dependent Role="Personas">
+        <PropertyRef Name="idProfesion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="miPrimeraBDModelStoreContainer">
+    <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profesion" EntityType="Self.Profesion" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Personas_Profesion" Association="Self.FK_Personas_Profesion">
+      <End Role="Profesion" EntitySet="Profesion" />
+      <End Role="Personas" EntitySet="Personas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

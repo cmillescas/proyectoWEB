@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="miPrimeraBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Personas">
+          <Key>
+            <PropertyRef Name="idPersona" />
+          </Key>
+          <Property Name="idPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="primerNombre" Type="nvarchar" MaxLength="25" />
+          <Property Name="segundoNombre" Type="nvarchar" MaxLength="25" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="50" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="idProfesion" Type="int" />
+        </EntityType>
+        <EntityType Name="Profesion">
+          <Key>
+            <PropertyRef Name="idProfesion" />
+          </Key>
+          <Property Name="idProfesion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreProfesion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Personas_Profesion">
+          <End Role="Profesion" Type="Self.Profesion" Multiplicity="0..1" />
+          <End Role="Personas" Type="Self.Personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesion">
+              <PropertyRef Name="idProfesion" />
+            </Principal>
+            <Dependent Role="Personas">
+              <PropertyRef Name="idProfesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="miPrimeraBDModelStoreContainer">
+          <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesion" EntityType="Self.Profesion" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Personas_Profesion" Association="Self.FK_Personas_Profesion">
+            <End Role="Profesion" EntitySet="Profesion" />
+            <End Role="Personas" EntitySet="Personas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="miPrimeraBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="miPrimeraBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Personas" EntityType="miPrimeraBDModel.Personas" />
+          <EntitySet Name="Profesion" EntityType="miPrimeraBDModel.Profesion" />
+          <AssociationSet Name="FK_Personas_Profesion" Association="miPrimeraBDModel.FK_Personas_Profesion">
+            <End Role="Profesion" EntitySet="Profesion" />
+            <End Role="Personas" EntitySet="Personas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Personas">
+          <Key>
+            <PropertyRef Name="idPersona" />
+          </Key>
+          <Property Name="idPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="primerNombre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="segundoNombre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idProfesion" Type="Int32" />
+          <NavigationProperty Name="Profesion" Relationship="miPrimeraBDModel.FK_Personas_Profesion" FromRole="Personas" ToRole="Profesion" />
+        </EntityType>
+        <EntityType Name="Profesion">
+          <Key>
+            <PropertyRef Name="idProfesion" />
+          </Key>
+          <Property Name="idProfesion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreProfesion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Personas" Relationship="miPrimeraBDModel.FK_Personas_Profesion" FromRole="Profesion" ToRole="Personas" />
+        </EntityType>
+        <Association Name="FK_Personas_Profesion">
+          <End Type="miPrimeraBDModel.Profesion" Role="Profesion" Multiplicity="0..1" />
+          <End Type="miPrimeraBDModel.Personas" Role="Personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesion">
+              <PropertyRef Name="idProfesion" />
+            </Principal>
+            <Dependent Role="Personas">
+              <PropertyRef Name="idProfesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="miPrimeraBDModelStoreContainer" CdmEntityContainer="miPrimeraBDEntities">
+          <EntitySetMapping Name="Personas">
+            <EntityTypeMapping TypeName="miPrimeraBDModel.Personas">
+              <MappingFragment StoreEntitySet="Personas">
+                <ScalarProperty Name="idProfesion" ColumnName="idProfesion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="segundoNombre" ColumnName="segundoNombre" />
+                <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
+                <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesion">
+            <EntityTypeMapping TypeName="miPrimeraBDModel.Profesion">
+              <MappingFragment StoreEntitySet="Profesion">
+                <ScalarProperty Name="nombreProfesion" ColumnName="nombreProfesion" />
+                <ScalarProperty Name="idProfesion" ColumnName="idProfesion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

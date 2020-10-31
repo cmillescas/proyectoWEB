@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="miPrimeraBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="miPrimeraBDEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Personas" EntityType="miPrimeraBDModel.Personas" />
+    <EntitySet Name="Profesion" EntityType="miPrimeraBDModel.Profesion" />
+    <AssociationSet Name="FK_Personas_Profesion" Association="miPrimeraBDModel.FK_Personas_Profesion">
+      <End Role="Profesion" EntitySet="Profesion" />
+      <End Role="Personas" EntitySet="Personas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Personas">
+    <Key>
+      <PropertyRef Name="idPersona" />
+    </Key>
+    <Property Name="idPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="primerNombre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="segundoNombre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="idProfesion" Type="Int32" />
+    <NavigationProperty Name="Profesion" Relationship="miPrimeraBDModel.FK_Personas_Profesion" FromRole="Personas" ToRole="Profesion" />
+  </EntityType>
+  <EntityType Name="Profesion">
+    <Key>
+      <PropertyRef Name="idProfesion" />
+    </Key>
+    <Property Name="idProfesion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreProfesion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Personas" Relationship="miPrimeraBDModel.FK_Personas_Profesion" FromRole="Profesion" ToRole="Personas" />
+  </EntityType>
+  <Association Name="FK_Personas_Profesion">
+    <End Type="miPrimeraBDModel.Profesion" Role="Profesion" Multiplicity="0..1" />
+    <End Type="miPrimeraBDModel.Personas" Role="Personas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profesion">
+        <PropertyRef Name="idProfesion" />
+      </Principal>
+      <Dependent Role="Personas">
+        <PropertyRef Name="idProfesion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

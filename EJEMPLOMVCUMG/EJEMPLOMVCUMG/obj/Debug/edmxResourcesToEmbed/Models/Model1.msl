@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="miPrimeraBDModelStoreContainer" CdmEntityContainer="miPrimeraBDEntities">
+    <EntitySetMapping Name="Personas">
+      <EntityTypeMapping TypeName="miPrimeraBDModel.Personas">
+        <MappingFragment StoreEntitySet="Personas">
+          <ScalarProperty Name="idProfesion" ColumnName="idProfesion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="segundoNombre" ColumnName="segundoNombre" />
+          <ScalarProperty Name="primerNombre" ColumnName="primerNombre" />
+          <ScalarProperty Name="idPersona" ColumnName="idPersona" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesion">
+      <EntityTypeMapping TypeName="miPrimeraBDModel.Profesion">
+        <MappingFragment StoreEntitySet="Profesion">
+          <ScalarProperty Name="nombreProfesion" ColumnName="nombreProfesion" />
+          <ScalarProperty Name="idProfesion" ColumnName="idProfesion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
